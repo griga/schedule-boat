@@ -16,6 +16,6 @@ module.exports = {
         staticPath: staticPath,
         uploadsPath: uploadsPath,
         port: process.env.PORT,
-        host: process.env.HOST
+        host: 'https://schedule-boat.herokuapp.com/'
     }
 };
