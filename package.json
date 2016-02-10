@@ -2,10 +2,9 @@
   "name": "schedule-boat",
   "version": "0.0.1",
   "description": "schedule/timers SPA",
-  "main": "index.js",
+  "main": "server/server.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server/server.js"
   },
   "keywords": [
     "schedule",
@@ -14,6 +13,8 @@
   "author": "griga",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.13.4"
+    "body-parser": "^1.14.2",
+    "express": "^4.13.4",
+    "morgan": "^1.6.1"
   }
 }
