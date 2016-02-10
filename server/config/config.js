@@ -9,13 +9,21 @@ module.exports = {
         staticPath: staticPath,
         uploadsPath: uploadsPath,
         port: 14650,
-        host: 'localhost'
+        host: 'localhost',
+        mail: {
+          user: "scheduleboat@gmail.com",
+          password: "scheduleboat4all"
+        }
     },
     production:{
         rootPath: rootPath,
         staticPath: staticPath,
         uploadsPath: uploadsPath,
         port: process.env.PORT,
-        host: 'localhost'
+        host: 'localhost',
+        mail: {
+          user: "scheduleboat@gmail.com",
+          password: "scheduleboat4all"
+        }
     }
 };
