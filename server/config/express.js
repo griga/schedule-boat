@@ -21,12 +21,16 @@ var mailOptions = {
     html: '<b>Hello world 🐴</b>' // html body
 };
 
-// send mail with defined transport object
-transporter.sendMail(mailOptions, function(error, info){
-    if(error){
-        return console.log(error);
-    }
-    console.log('Message sent: ' + info.response);
+
+
+var j = schedule.scheduleJob('*/5 * * * *', function(){
+  // send mail with defined transport object
+  transporter.sendMail(mailOptions, function(error, info){
+      if(error){
+          return console.log(error);
+      }
+      console.log('Message sent: ' + info.response);
+  });
 });
 
 module.exports = function (app, config) {
