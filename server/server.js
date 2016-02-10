@@ -8,8 +8,8 @@ var config = require('./config/config')[env];
 
 require('./config/express')(app, config);
 
-http.listen(config.port, config.host, function () {
-    console.log('express running at ' + config.host + ':' + config.port)
+http.listen(config.port,  function () {
+    console.log('express running at ' + ':' + config.port)
 });
 
 module.exports = app;
