@@ -15,7 +15,7 @@ module.exports = {
         rootPath: rootPath,
         staticPath: staticPath,
         uploadsPath: uploadsPath,
-        port: process.env.PORT,
+        port: 80,
         host: 'localhost'
     }
 };
