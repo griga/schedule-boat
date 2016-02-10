@@ -8,7 +8,7 @@ var fs = require('fs');
 
 
 var nodemailer = require('nodemailer');
-
+var schedule = require('node-schedule');
 // create reusable transporter object using the default SMTP transport
 var transporter = nodemailer.createTransport('smtps://scheduleboat%40gmail.com:scheduleboat4all@smtp.gmail.com');
 
