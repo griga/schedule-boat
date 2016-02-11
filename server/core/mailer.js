@@ -14,15 +14,15 @@ let mailOptions = {
 };
 
 
-const notify = (message)=>{
-
+const notifyAlive = ()=>{
     transporter.sendMail(_.extend(mailOptions, {
-        message
+        subject: 'Mailer Alive',
+        html: '<h1>Hello Me</h1><p>Mailer is working like clock</p>'
     }), function(error, info){
         if(error){
             return console.log(error);
         }
-        console.log('Message sent: ' + info.response);
+        console.log('Mailer alive message sent: ' + info.response);
     });
 }
 const error = (message, task)=>{
@@ -42,6 +42,6 @@ const error = (message, task)=>{
 
 module.exports = {
     transporter,
-    notify,
+    notifyAlive,
     error
 };

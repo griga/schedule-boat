@@ -19,13 +19,15 @@ let promise = new Promise((resolve, reject)=>{
         tasks.insert({
             type: 'ping',
             url: 'http://sandbox-griga.rhcloud.com',
-            expect: 'Facebook Cover Designer'
+            expect: 'Facebook Cover Designer',
+            fails: 0
         })
 
         tasks.insert({
             type: 'ping',
             url: 'https://schedule-boat.herokuapp.com',
-            expect: 'Schedule Boat'
+            expect: 'Schedule Boat',
+            fails: 0
         })
         console.log('init db data', db.listCollections( ));
 
