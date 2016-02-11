@@ -24,9 +24,10 @@ const ping = (task)=> {
             res.on('data', function (data) {
                 let content = data.toString();
                 if (task.expect && content.search(task.expect) == -1) {
-                    console.log('ping via proxy fail. conditions not met for ' + task.url)
+
                     proxy.fails++;
-                    reject(content)
+                    task.fails++;
+                    reject('ping via proxy fail. conditions not met')
                 } else {
                     console.log('ping via proxy success. conditions met for ' + task.url)
                     proxy.successes++;

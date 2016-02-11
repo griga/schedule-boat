@@ -10,8 +10,7 @@ const transporter = nodemailer.createTransport('smtps://scheduleboat%40gmail.com
 let mailOptions = {
     from: 'Schedule Boat Mailer <scheduleboat@gmail.com>', // sender address
     to: 'grigach@gmail.com', // list of receivers
-    subject: 'Hello', // Subject line
-    html: '<b>Notify Mailing?</b>' // html body
+
 };
 
 
@@ -26,10 +25,11 @@ const notify = (message)=>{
         console.log('Message sent: ' + info.response);
     });
 }
-const error = (message)=>{
+const error = (message, task)=>{
 
     transporter.sendMail(_.extend(mailOptions, {
-        message
+        subject: 'Scheduler Error',
+        html: message + '\n ' + task.url + '\n' + task.fails
     }), function(error, info){
         if(error){
             return console.log(error);

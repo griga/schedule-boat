@@ -9,12 +9,16 @@ const pinger = require('./pinger')
 
 const schedulePing = (task)=>{
 
-    schedule.scheduleJob('* * * * *', function(){
+    schedule.scheduleJob('*/10 * * * *', function(){
 
         pinger.ping(task).then(()=>{
 
         }, (reason)=>{
-            mailer.error(reason)
+            if(task.fails % 10 == 0 ){
+
+                mailer.error(reason, task)
+            }
+
         })
 
     });
@@ -31,6 +35,4 @@ module.exports = (db)=>{
 
         }
     })
-
-    //console.log('scheduler ', db.listCollections())
 }
