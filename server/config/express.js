@@ -7,6 +7,9 @@ const bodyParser = require('body-parser')
 const fs = require('fs');
 const scheduler = require('../core/scheduler');
 
+require('../core/db').then((db)=>{
+    scheduler(db)
+})
 
 
 module.exports = function (app, config) {
@@ -16,7 +19,4 @@ module.exports = function (app, config) {
 };
 
 
-require('../core/db').then((db)=>{
-    scheduler(db)
-})
 

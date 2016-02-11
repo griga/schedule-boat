@@ -5,26 +5,28 @@ const schedule = require('node-schedule');
 const mailer = require('./mailer')
 
 
-// setup e-mail data with unicode symbols
-var mailOptions = {
-    from: 'M22 Foo 👥 <scheduleboat@gmail.com>', // sender address
-    to: 'grigach@gmail.com', // list of receivers
-    subject: 'Hello ✔', // Subject line
-    text: 'Hello world 🐴', // plaintext body
-    html: '<b>Hello world 🐴</b>' // html body
-};
+const pinger = require('./pinger')
 
-schedule.scheduleJob('*/5 * * * *', function(){
-    // send mail with defined transport object
-    mailer.sendMail(mailOptions, function(error, info){
-        if(error){
-            return console.log(error);
-        }
-        console.log('Message sent: ' + info.response);
-    });
-});
+const schedulePing = (task)=>{
+    pinger.ping(task)
+    //schedule.scheduleJob('*/10 * * * *', function(){
+    //
+    //    console.log('scheduled ping for ', task)
+    //
+    //});
+}
 
 module.exports = (db)=>{
-    db.getCollection('task')
-    console.log('scheduler ', db.listCollections())
+    let tasks = db.getCollection('tasks')
+
+    tasks.find({}).forEach((task)=>{
+        switch (task.type){
+            case 'ping':
+                schedulePing(task)
+                break;
+
+        }
+    })
+
+    //console.log('scheduler ', db.listCollections())
 }

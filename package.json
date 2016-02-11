@@ -10,6 +10,9 @@
     "schedule",
     "timer"
   ],
+  "engines": {
+    "node": "5.6.0"
+  },
   "author": "griga",
   "license": "ISC",
   "dependencies": {
