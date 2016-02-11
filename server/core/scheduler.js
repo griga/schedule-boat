@@ -9,7 +9,7 @@ const pinger = require('./pinger')
 
 const schedulePing = (task)=>{
 
-    schedule.scheduleJob('*/60 * * * *', function(){
+    schedule.scheduleJob('* * * * *', function(){
 
         pinger.ping(task).then(()=>{
 
