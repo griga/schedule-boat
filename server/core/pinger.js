@@ -29,7 +29,6 @@ const ping = (task)=> {
                     task.fails++;
                     reject('ping via proxy fail. conditions not met')
                 } else {
-                    console.log('ping via proxy success. conditions met for ' + task.url)
                     proxy.successes++;
                     resolve(content)
                 }
