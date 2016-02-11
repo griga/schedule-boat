@@ -1,34 +1,38 @@
-var fs = require('fs')
-var loki = require('lokijs');
+"use strict";
 
-var proxies = require('./../db/proxies.json');
+const fs = require('fs')
+const loki = require('lokijs');
 
-var filepath = __dirname + '/../db/db.json';
+let proxies = require('../db/proxies.json');
 
-let db;
-if (fs.existsSync(filepath)){
-    db = new loki(filepath);
-    db.loadDatabase({}, function(){
-        console.log('loaded', db.listCollections())
-    })
-} else {
-    db = new loki();
-    var tasks = db.addCollection('tasks');
+const filepath = __dirname + '/../db/db.json';
 
-    tasks.insert({
-        type: 'ping',
-        url: 'http://sandbox-griga.rhcloud.com',
-        expect: 'Facebook Cover Designer'
-    })
+const db = new loki(filepath);
+let promise = new Promise((resolve, reject)=>{
+    if (fs.existsSync(filepath)){
+        db.loadDatabase({}, function(){
+            resolve(db)
+        })
+    } else {
+        let tasks = db.addCollection('tasks');
 
-    tasks.insert({
-        type: 'ping',
-        url: 'https://schedule-boat.herokuapp.com',
-        expect: 'Schedule Boat'
-    })
-    console.log('init db data', db.listCollections( ));
+        tasks.insert({
+            type: 'ping',
+            url: 'http://sandbox-griga.rhcloud.com',
+            expect: 'Facebook Cover Designer'
+        })
 
-    db.save();
-}
+        tasks.insert({
+            type: 'ping',
+            url: 'https://schedule-boat.herokuapp.com',
+            expect: 'Schedule Boat'
+        })
+        console.log('init db data', db.listCollections( ));
+
+        db.save();
+        resolve(db)
+    }
+})
 
 
+module.exports = promise;
