@@ -26,10 +26,22 @@ const notify = (message)=>{
         console.log('Message sent: ' + info.response);
     });
 }
+const error = (message)=>{
+
+    transporter.sendMail(_.extend(mailOptions, {
+        message
+    }), function(error, info){
+        if(error){
+            return console.log(error);
+        }
+        console.log('Message sent: ' + info.response);
+    });
+}
 
 
 
 module.exports = {
     transporter,
-    notify
+    notify,
+    error
 };

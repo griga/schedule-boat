@@ -8,12 +8,16 @@ const mailer = require('./mailer')
 const pinger = require('./pinger')
 
 const schedulePing = (task)=>{
-    pinger.ping(task)
-    //schedule.scheduleJob('*/10 * * * *', function(){
-    //
-    //    console.log('scheduled ping for ', task)
-    //
-    //});
+
+    schedule.scheduleJob('*/60 * * * *', function(){
+
+        pinger.ping(task).then(()=>{
+
+        }, (reason)=>{
+            mailer.error(reason)
+        })
+
+    });
 }
 
 module.exports = (db)=>{
