@@ -1,7 +1,10 @@
+"use strict";
+
+
 var express = require('express');
 var logger = require('morgan');
 var bodyParser = require('body-parser')
-var fs = require('fs');
+let fs = require('fs');
 
 // var extractor = require('./../core/extractor')
 // var downloader = require('./../core/downloader')
