@@ -4,33 +4,38 @@
 
 "use strict";
 
-const Http = require('http');
+const request = require('request');
 
 const proxies = require('./proxies');
 const randomUa = require('random-ua')
 
-const fetch = (url, proxy)=> {
-    proxy = proxy || proxies.getNext()
+const fetch = (url)=> {
     return new Promise((resolve, reject)=> {
-        const req = Http.request({
-            host: proxy.host,
-            port: proxy.port,
+        let proxy = proxies.getProxy()
+        request({
             method: 'GET',
-            path: url,
+            url: url,
             headers: {
-                'User-Agent': randomUa.generate()
-            }
-        }, (res) => {
-            res.on('data', (data) => {
-                proxy.successes++;
-                resolve(data)
-            });
-            res.on('error', (error) => {
+                "Cache-Control": "no-cache",
+                "User-Agent": randomUa.generate()
+            },
+            proxy: proxy.url,
+        }, (error, response, body) => {
+            if (error) {
                 proxy.fails++;
                 console.log('fetch error', error)
-            })
+                reject(error)
+            } else {
+                proxy.successes++;
+                console.log('========================')
+                console.log('fetch success')
+                console.log('proxy', proxy.url)
+                console.log('url', url)
+                resolve(body)
+
+            }
+
         });
-        req.end();
     })
 }
 
@@ -42,8 +47,8 @@ const ping = (task)=> {
                 reject('fetch via proxy fail. conditions not met')
             }
 
-            if(task.related){
-                Promise.all(task.related.map((rel)=>{
+            if (task.related) {
+                Promise.all(task.related.map((rel)=> {
                     return fetch(task.url + rel)
                 })).then(resolve)
             } else {

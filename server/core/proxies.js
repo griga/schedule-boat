@@ -5,9 +5,12 @@
 
 "use strict";
 
+const _ = require('lodash');
+
 let proxies = require('../db/proxies.json').map((proxy)=>{
     let split = proxy.split(':')
     return {
+        url: 'http://' + proxy,
         host: split[0],
         port: split[1],
         successes: 0,
@@ -16,18 +19,20 @@ let proxies = require('../db/proxies.json').map((proxy)=>{
 
 })
 
+let proxy;
 
+let currentIdx = _.random(proxies.length - 1);
 
-
-let currentIdx = 0;
-
-function getNext(){
+function getProxy(){
     if (currentIdx == proxies.length){
         currentIdx = 0
     }
-    return proxies[currentIdx++]
+    if(!proxy || proxy.fails == 10){
+        proxy = proxies[currentIdx++]
+    }
+    return proxy;
 }
 
 module.exports = {
-    getNext
+    getProxy
 }

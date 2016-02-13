@@ -18,25 +18,47 @@ let promise = new Promise((resolve, reject)=>{
 
         tasks.insert({
             type: 'ping',
-            url: 'http://sandbox-griga.rhcloud.com',
+            url: 'http://sandbox-griga.rhcloud.com/',
             expect: 'Facebook Cover Designer',
             fails: 0,
             related: [
-                '/build/vendor.bundle.js',
-                '/build/bundle.js',
-                '/build/style.css'
+                'build/vendor.bundle.js',
+                'build/bundle.js',
+                'build/style.css'
             ]
         })
 
         tasks.insert({
             type: 'ping',
-            url: 'https://schedule-boat.herokuapp.com',
+            url: 'http://schedule-boat.herokuapp.com/',
             expect: 'Schedule Boat',
             fails: 0,
             related: [
-                '/build/vendor.bundle.js',
-                '/build/bundle.js',
-                //'build/style.css'
+                'build/vendor.bundle.js',
+                'build/bundle.js',
+                'build/style.css'
+            ]
+        })
+        tasks.insert({
+            type: 'ping',
+            url: 'http://sang-shockwave.rhcloud.com/',
+            expect: 'SmartAdmin (AngularJS)',
+            fails: 0,
+            related: [
+                'build/vendor.js',
+                'build/app.js',
+                'styles/css/smartadmin-production.min.css'
+            ]
+        })
+        tasks.insert({
+            type: 'ping',
+            url: 'http://sarj-shockwave.rhcloud.com/',
+            expect: 'SmartAdmin (ReactJS)',
+            fails: 0,
+            related: [
+                'build/vendor.bundle.js',
+                'build/bundle.js',
+                'styles/css/smartadmin-production.min.css'
             ]
         })
         console.log('init db data', db.listCollections( ));
