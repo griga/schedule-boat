@@ -1,0 +1,9 @@
+@import "../../bower_components/angular-material/angular-material.scss";
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+body{
+  overflow-x: hidden;
+}

@@ -7,6 +7,8 @@ var uglify = require('gulp-uglify');
 var fs = require('fs');
 var babel = require('gulp-babel')
 var _ = require('lodash');
+var sass = require('gulp-sass');
+
 
 var source = {
     js: {
@@ -29,6 +31,12 @@ var source = {
         ],
         html: 'src/app/**/*.html'
     },
+    sass: {
+        main: 'src/sass/style.scss',
+        src: [
+            'src/sass/**/*.scss',
+        ]
+    },
     vendor: {
       paths: [
         "bower_components/lodash/dist/lodash.min.js",
@@ -47,12 +55,16 @@ var source = {
 };
 
 var destinations = {
-    js: 'public/build'
+    js: 'public/build',
+    sass: 'public/build',
 };
 
 
 gulp.task('build', function(){
     return es.merge(gulp.src(source.js.src) , getTemplateStream())
+        .pipe(babel({
+            presets: ['es2015']
+        }))
          .pipe(ngAnnotate())
          .pipe(uglify())
         .pipe(concat('bundle.js'))
@@ -73,6 +85,7 @@ gulp.task('js', function(){
 });
 
 gulp.task('watch', function(){
+    gulp.watch(source.sass.src, ['sass']);
     gulp.watch(source.js.src, ['js']);
     gulp.watch(source.js.html, ['js']);
 });
@@ -89,8 +102,14 @@ gulp.task('vendor', function(){
         .pipe(gulp.dest(destinations.js))
 });
 
-gulp.task('prod', ['vendor', 'build']);
-gulp.task('dev', ['vendor', 'js', 'watch']);
+gulp.task('sass', function () {
+    return gulp.src(source.sass.src)
+        .pipe(sass().on('error', sass.logError))
+        .pipe(gulp.dest(destinations.sass));
+});
+
+gulp.task('prod', ['vendor', 'sass', 'build']);
+gulp.task('dev', ['vendor', 'sass', 'js', 'watch']);
 gulp.task('default', ['dev']);
 
 var swallowError = function(error){

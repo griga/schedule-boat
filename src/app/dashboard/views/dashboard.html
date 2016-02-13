@@ -1,0 +1,18 @@
+<md-content class="overflow-hidden" flex layout-padding layout="column">
+
+    <div id="app-toolbar">
+
+
+        <md-button ng-if="dashboard.freeCells > 0" photo-selector on-select="dashboard.addPictures(ids)" max-selection="dashboard.freeCells">
+            Select multiple photos <md-icon md-menu-align-target md-font-set="material-icons">photo_library</md-icon>
+        </md-button>
+
+        <!--<md-button ng-click="dashboard.render()">Debug Render <md-icon md-menu-align-target md-font-set="material-icons">photo</md-icon></md-button>-->
+    </div>
+
+    <div id="app-viewport" flex layout="column" layout-align="center center">
+
+
+        viewport
+    </div>
+</md-content>
