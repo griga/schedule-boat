@@ -20,14 +20,24 @@ let promise = new Promise((resolve, reject)=>{
             type: 'ping',
             url: 'http://sandbox-griga.rhcloud.com',
             expect: 'Facebook Cover Designer',
-            fails: 0
+            fails: 0,
+            related: [
+                '/build/vendor.bundle.js',
+                '/build/bundle.js',
+                '/build/style.css'
+            ]
         })
 
         tasks.insert({
             type: 'ping',
             url: 'https://schedule-boat.herokuapp.com',
             expect: 'Schedule Boat',
-            fails: 0
+            fails: 0,
+            related: [
+                '/build/vendor.bundle.js',
+                '/build/bundle.js',
+                //'build/style.css'
+            ]
         })
         console.log('init db data', db.listCollections( ));
 

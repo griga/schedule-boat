@@ -55,7 +55,7 @@ gulp.task('build', function(){
     return es.merge(gulp.src(source.js.src) , getTemplateStream())
          .pipe(ngAnnotate())
          .pipe(uglify())
-        .pipe(concat('build.js'))
+        .pipe(concat('bundle.js'))
         .pipe(gulp.dest(destinations.js));
 });
 
@@ -68,7 +68,7 @@ gulp.task('js', function(){
           presets: ['es2015']
         }))
         .on('error', swallowError)
-        .pipe(concat('build.js'))
+        .pipe(concat('bundle.js'))
         .pipe(gulp.dest(destinations.js));
 });
 
@@ -84,7 +84,7 @@ gulp.task('vendor', function(){
       }
     });
    return gulp.src(source.vendor.paths)
-        .pipe(concat('vendor.js'))
+        .pipe(concat('vendor.bundle.js'))
         //.on('error', swallowError)
         .pipe(gulp.dest(destinations.js))
 });
