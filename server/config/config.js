@@ -9,7 +9,7 @@ module.exports = {
         staticPath: staticPath,
         uploadsPath: uploadsPath,
         port: 14650,
-        host: 'localhost',
+        host: 'local.schedule-boat.herokuapp.com',
         mail: {
           user: "scheduleboat@gmail.com",
           password: "scheduleboat4all"

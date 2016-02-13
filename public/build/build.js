@@ -7,6 +7,6 @@ angular.element(document).ready(function () {
 });
 'use strict';
 
-angular.module('app', []).run(function () {
+angular.module('app', ['ngAnimate', 'ngMessages', 'ngAria', 'ngMaterial']).run(function () {
   console.log('run');
 });

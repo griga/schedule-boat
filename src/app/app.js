@@ -1,3 +1,8 @@
-angular.module('app', []).run(()=>{
+angular.module('app', [
+  'ngAnimate',
+  'ngMessages',
+  'ngAria',
+  'ngMaterial',
+]).run(()=>{
   console.log('run')
 })
