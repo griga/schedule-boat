@@ -28,6 +28,7 @@ function getProxy(){
         currentIdx = 0
     }
     if(!proxy || proxy.fails == 10){
+        proxy.fails = 0
         proxy = proxies[currentIdx++]
     }
     return proxy;
