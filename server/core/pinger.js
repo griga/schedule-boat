@@ -23,14 +23,12 @@ const fetch = (url)=> {
         }, (error, response, body) => {
             if (error) {
                 proxy.fails++;
-                console.log('fetch error', error)
+                console.log(`fetch ${url} error via ${proxy.url} ` )
+                console.log(error)
                 reject(error)
             } else {
                 proxy.successes++;
-                console.log('========================')
-                console.log('fetch success')
-                console.log('proxy', proxy.url)
-                console.log('url', url)
+                console.log(`fetch ${url} success via ${proxy.url} ` )
                 resolve(body)
 
             }
@@ -44,7 +42,7 @@ const ping = (task)=> {
         fetch(task.url).then((data)=> {
             if (task.expect && data.toString().search(task.expect) == -1) {
                 task.fails++;
-                reject('fetch via proxy fail. conditions not met')
+                reject(`conditions not met. expected: ${task.expect}`)
             }
 
             if (task.related) {

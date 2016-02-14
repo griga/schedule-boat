@@ -53,12 +53,40 @@ let promise = new Promise((resolve, reject)=>{
         tasks.insert({
             type: 'ping',
             url: 'http://sarj-shockwave.rhcloud.com/',
-            expect: 'SmartAdmin (ReactJS)',
+            expect: 'SmartAdmin',
             fails: 0,
             related: [
                 'build/vendor.bundle.js',
                 'build/bundle.js',
                 'styles/css/smartadmin-production.min.css'
+            ]
+        })
+        tasks.insert({
+            type: 'ping',
+            url: 'http://aia-griga.rhcloud.com/',
+            expect: 'AiA',
+            fails: 0,
+            related: [
+                'style/css/style.css',
+                'build/main.js',
+            ]
+        })
+        tasks.insert({
+            type: 'ping',
+            url: 'http://mir-mironova.rhcloud.com/',
+            expect: 'Mironova',
+            fails: 0,
+            related: [
+                'themes/mir/css/style.css',
+            ]
+        })
+        tasks.insert({
+            type: 'ping',
+            url: 'http://likarski-zasoby.rhcloud.com/',
+            expect: 'Лiкарськi засоби',
+            fails: 0,
+            related: [
+                '/css/style.css',
             ]
         })
         console.log('init db data', db.listCollections( ));
