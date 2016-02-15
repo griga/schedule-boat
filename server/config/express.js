@@ -11,8 +11,9 @@ require('../core/db').then((db)=>{
     scheduler(db)
 })
 
-console.log('========= APP_URL ===========')
-console.log(process.env.APP_URL)
+require('heroku-self-ping')(process.env.APP_URL, {
+    interval: 3 * 60 * 1000 // ping self every 3 minutes
+});
 
 module.exports = (app, config) => {
     app.use(logger('dev'));
