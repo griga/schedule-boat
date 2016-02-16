@@ -11,7 +11,7 @@ const schedulePing = (task)=>{
 
     schedule.scheduleJob('*/20 * * * * *', function(){
         pinger.ping(task).then(()=>{
-            console.log('ping success', task)
+            console.log('ping success', task.url)
         }, (reason)=>{
             if(task.fails % 10 == 0 ){
                 mailer.error(reason, task)
